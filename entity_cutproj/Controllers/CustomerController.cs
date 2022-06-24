@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using entity_cutproj.DataAcess;
 using entity_cutproj.Models;
+using entity_cutproj.ViewModel;
 
 namespace entity_cutproj.Controllers
 {
@@ -22,25 +23,46 @@ namespace entity_cutproj.Controllers
             return View("loadcustomer",csobj);
         }
         public ActionResult Enter()
+
         {
-            return View("Entercustomer");
+            custViewModel obj = new custViewModel();
+            //emty customer object for first time binding
+            obj.customerobj = new customer();
+            custdal dal = new custdal();
+            List<customer> custcoll = dal.Customers.ToList<customer>();
+            obj.customers = custcoll;
+
+            return View("Entercustomer",obj);
         }
-        public ActionResult submit(customer obj)
+        public ActionResult submit(custViewModel obj)
         {
+            custViewModel vm = new custViewModel();
+            customer obj1 = new customer();
+            obj1.custcode = Request.Form["customerobj.custcode"];
+            obj1.custname = Request.Form["customerobj.custname"];
+
             if(ModelState.IsValid)
             {
+                
                 //insert customer object to db
-                custdal dal=new custdal();
-                dal.Customers.Add(obj);
-                dal.SaveChanges();
-                return View("LoadCustomer", obj);
+                custdal Dal=new custdal();
+                Dal.Customers.Add(obj.customerobj);
+                Dal.SaveChanges();
+                vm.customerobj=new customer();
+               
             }
+           // return View("LoadCustomer", obj);
             else
             {
-                return View("Entercustomer",obj);
+                vm.customerobj = obj1;
             }
 
-            
+            custdal dal = new custdal();
+            List<customer> custcoll = dal.Customers.ToList<customer>();
+            vm.customers = custcoll;
+            return View("Entercustomer", vm);
+           
+
         }
     }
 }

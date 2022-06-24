@@ -1,5 +1,5 @@
-﻿@model entity_cutproj.Models.customer
-    @using entity_cutproj;
+﻿@model entity_cutproj.ViewModel.custViewModel
+    @using entity_cutproj.Models;
 @{
     Layout = null;
 }
@@ -15,12 +15,31 @@
     <div>
         @using (Html.BeginForm("Submit", "Customer", FormMethod.Post))
         {
-            <i>Customer Name</i> @Html.TextBoxFor(m => m.custname) <br />
-            @Html.ValidationMessageFor(x => x.custname)<br />
-            <i> Customer Code </i> @Html.TextBoxFor(m => m.custcode)<br />
-            @Html.ValidationMessageFor(x => x.custcode)<br />
+            <i>Customer Name</i> @Html.TextBoxFor(m => m.customerobj.custname) <br />
+            @Html.ValidationMessageFor(x => x.customerobj.custname)<br />
+            <i> Customer Code </i> @Html.TextBoxFor(m => m.customerobj.custcode)<br />
+            @Html.ValidationMessageFor(x => x.customerobj.custcode)<br />
             <input id="Submit1" type="submit" value="submit" />
+        }
+    <table>
+        <tr>
+            <td>CustID</td>
+            <td>CustName</td>
+        </tr>
+        @foreach (customer c1 in Model.customers)
+        {
+            <tr>
+                <td>@c1.custcode</td>
+                <td>@c1.custname</td>
+            </tr>
 
-        }</div>
+        }
+    </table>
+        
+
+
+
+
+            </div>
 </body>
 </html>
