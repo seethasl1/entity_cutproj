@@ -1,0 +1,26 @@
+﻿@model entity_cutproj.Models.customer
+    @using entity_cutproj;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Entercustomer</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Submit", "Customer", FormMethod.Post))
+        {
+            <i>Customer Name</i> @Html.TextBoxFor(m => m.custname) <br />
+            @Html.ValidationMessageFor(x => x.custname)<br />
+            <i> Customer Code </i> @Html.TextBoxFor(m => m.custcode)<br />
+            @Html.ValidationMessageFor(x => x.custcode)<br />
+            <input id="Submit1" type="submit" value="submit" />
+
+        }</div>
+</body>
+</html>
