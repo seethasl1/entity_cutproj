@@ -21,25 +21,31 @@
             @Html.ValidationMessageFor(x => x.customerobj.custcode)<br />
             <input id="Submit1" type="submit" value="submit" />
         }
-    <table>
-        <tr>
-            <td>CustID</td>
-            <td>CustName</td>
-        </tr>
-        @foreach (customer c1 in Model.customers)
-        {
+        <table>
             <tr>
-                <td>@c1.custcode</td>
-                <td>@c1.custname</td>
+                <td>CustID</td>
+                <td>CustName</td>
             </tr>
+            @foreach (customer c1 in Model.customers)
+            {
+                <tr>
+                    <td>@c1.custcode</td>
+                    <td>@c1.custname</td>
+                </tr>
 
-        }
-    </table>
+            }
+        </table>
+
         
+       
 
 
-
-
-            </div>
+    </div>
+    <div>
+        <form method="post" action="Logout">
+            <input id="Submit1" type="submit" value="Logout" />
+        </form>
+        
+    </div>
 </body>
 </html>

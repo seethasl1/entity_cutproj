@@ -13,9 +13,10 @@ namespace entity_cutproj.DataAcess
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<customer>().ToTable("customer");
-
+            modelBuilder.Entity<Login>().ToTable("usr_Login");
         }
-        public DbSet<customer> Customers { get; set; }   
+        public DbSet<customer> Customers { get; set; }
+        public DbSet<Login> Logins { get; set; }
 
     }
 }

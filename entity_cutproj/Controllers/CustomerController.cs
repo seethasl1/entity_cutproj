@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using entity_cutproj.DataAcess;
 using entity_cutproj.Models;
 using entity_cutproj.ViewModel;
 
 namespace entity_cutproj.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
+        
         // GET: Customer
         public ActionResult Index()
         {
@@ -63,6 +66,12 @@ namespace entity_cutproj.Controllers
             return View("Entercustomer", vm);
            
 
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Authenticate","Login");
         }
     }
 }
